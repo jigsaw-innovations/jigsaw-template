@@ -1,3 +1,4 @@
+# TODO: Add lanes for automated screen capture and metadata (app descritpion upload)
 fastlane_require "net/http"
 fastlane_require "dotenv"
 
