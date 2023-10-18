@@ -6,7 +6,7 @@ on:
       - '*'
 
 jobs:
-  deploy:
+  deploy_production:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code 🛒

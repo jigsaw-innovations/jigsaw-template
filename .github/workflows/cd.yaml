@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  deploy_beta:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code 🛒
@@ -20,12 +20,12 @@ jobs:
       - name: Install Fastlane 🏎️
         run: gem install fastlane
 
-      - name: iOS Beta Deployment
-        run: fastlane ios beta 🖥️✈️
+      - name: iOS Beta Deployment 🖥️✈️
+        run: fastlane ios beta
         env:
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
 
-      - name: Android Beta Deployment
-        run: fastlane android beta 🤖✈️
+      - name: Android Beta Deployment 🤖✈️
+        run: fastlane android beta
         env:
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
