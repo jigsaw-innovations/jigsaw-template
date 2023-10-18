@@ -29,7 +29,7 @@ jobs:
             ${{ runner.os }}-node-
 
   test:
-    needs: checkout_and_setup
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code 🛒
@@ -47,7 +47,7 @@ jobs:
         run: npm test
 
   lint:
-    needs: checkout_and_setup
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code 🛒
