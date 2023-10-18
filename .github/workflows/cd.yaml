@@ -9,23 +9,23 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
+      - name: Checkout Code 🛒
         uses: actions/checkout@v2
 
-      - name: Set up Ruby
+      - name: Set up Ruby 💎
         uses: actions/setup-ruby@v1
         with:
           ruby-version: '2.7'
 
-      - name: Install Fastlane
+      - name: Install Fastlane 🏎️
         run: gem install fastlane
 
       - name: iOS Beta Deployment
-        run: fastlane ios beta
+        run: fastlane ios beta 🖥️✈️
         env:
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
 
       - name: Android Beta Deployment
-        run: fastlane android beta
+        run: fastlane android beta 🤖✈️
         env:
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
