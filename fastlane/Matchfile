@@ -1,0 +1,10 @@
+# Specifies the Git URL where the certificates and provisioning profiles are stored. In this case, it points to a Bitbucket repository at
+git_url("git@bitbucket.org:teamairship/certificates.git")
+# Sets the Git branch to be used within the certificates repository. The branch name is fetched from an environment variable named FASTLANE_PRODUCT_NAME.
+git_branch(ENV["FASTLANE_PRODUCT_NAME"])
+# Indicates that the certificates and profiles are stored in a Git repository. This is in contrast to other storage options like Google Cloud or Amazon S3.
+storage_mode("git")
+# Specifies the type of certificate and provisioning profile to manage. In this case, it is set to "development," which usually means the profiles and certificates are suitable for development and testing, but not for distribution on the App Store.
+type("development")
+
+# Look into - https://carloscuesta.me/blog/shipping-react-native-fastlane-travis
