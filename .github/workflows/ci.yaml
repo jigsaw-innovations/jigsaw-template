@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build_and_test:
+  setup:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code 🛒
@@ -20,8 +20,46 @@ jobs:
       - name: Install Dependencies 🧹
         run: npm install
 
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+  test:
+    needs: checkout_and_setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code 🛒
+        uses: actions/checkout@v2
+
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Run Tests 🧪
         run: npm test
+
+  lint:
+    needs: checkout_and_setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code 🛒
+        uses: actions/checkout@v2
+
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Run Linter 🛀🏻
         run: npm run lint
