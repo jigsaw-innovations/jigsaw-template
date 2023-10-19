@@ -1,6 +1,21 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
+## Prequesites
+
+- node
+- ruby (if deploying from your local)
+- fastlane (if deploying from your local)
+
 # Getting Started
+
+
+
+## Using yarn
+
+
+## Using npm
+
+
 
 ## Step 1: Start the Metro Server
 

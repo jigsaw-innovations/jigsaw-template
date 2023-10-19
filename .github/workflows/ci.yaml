@@ -7,7 +7,7 @@ on:
 
 jobs:
   setup:
-    name: "Setup: Checkout and Install Dependencies 🛒"
+    name: "Setup: Installing dependencies 🛒"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code 🛒
@@ -30,7 +30,7 @@ jobs:
             ${{ runner.os }}-node-
 
   test:
-    name: "Test: Run tests against application 🧪"
+    name: "Testing: Running tests against application 🧪"
     needs: setup
     runs-on: ubuntu-latest
     steps:
@@ -49,7 +49,7 @@ jobs:
         run: npm test
 
   lint:
-    name: "Linting: Run eslint against application 🧹"
+    name: "Linting: Running eslint against application 🧹"
     needs: setup
     runs-on: ubuntu-latest
     steps:

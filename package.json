@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "ios": "react-native run-ios",
     "android:build": "fastlane fastlane android build_application",
     "android:develop": "fastlane android develop",
     "android:staging": "fastlane android staging",
     "android:beta": "fastlane android beta",
     "android:release": "fastlane android release",
-    "ios": "react-native run-ios",
     "ios:build": "fastlane fastlane ios build_application",
     "ios:develop": "fastlane ios develop",
     "ios:staging": "fastlane ios staging",
