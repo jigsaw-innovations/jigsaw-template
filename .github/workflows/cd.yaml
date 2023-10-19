@@ -6,7 +6,8 @@ on:
       - main
 
 jobs:
-  deploy_beta:
+  checkout_and_setup:
+    name: "Setup: Checkout and Install Dependencies 🛒"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code 🛒
@@ -17,15 +18,69 @@ jobs:
         with:
           ruby-version: '2.7'
 
+      - name: Cache Ruby Gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
       - name: Install Fastlane 🏎️
         run: gem install fastlane
+
+  ios_beta_deploy:
+    name: "Deployment: iOS Beta 🖥️✈️"
+    needs: checkout_and_setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code 🛒
+        uses: actions/checkout@v2
+
+      # Repeat the setup steps, including restoring the cache
+      - name: Set up Ruby 💎
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
+
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
 
       - name: iOS Beta Deployment 🖥️✈️
         run: fastlane ios beta
         env:
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+
+  android_beta_deploy:
+    name: "Deployment: Android Beta 🤖✈️"
+    needs: checkout_and_setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code 🛒
+        uses: actions/checkout@v2
+
+      # Repeat the setup steps, including restoring the cache
+      - name: Set up Ruby 💎
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
+
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
 
       - name: Android Beta Deployment 🤖✈️
         run: fastlane android beta
         env:
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          JSON_KEY_DATA: ${{ secrets.JSON_KEY_DATA }}

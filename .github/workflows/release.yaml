@@ -6,7 +6,24 @@ on:
       - '*'
 
 jobs:
-  deploy_production:
+  setup:
+    name: "Setup: Checkout and Install Dependencies 🛒"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code 🛒
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby Environment 💎
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
+
+      - name: Install Fastlane 🏎️
+        run: gem install fastlane
+
+  ios_production:
+    name: "Deployment: iOS Production Release 🖥️🚀"
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code 🛒
@@ -25,6 +42,22 @@ jobs:
         env:
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+
+  android_production:
+    name: "Deployment: Android Production Release 🤖🚀"
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code 🛒
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby 💎
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
+
+      - name: Install Fastlane 🏎️
+        run: gem install fastlane
 
       - name: Android Production Deployment 🤖🚀
         run: fastlane android release
