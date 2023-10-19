@@ -2,21 +2,25 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 ## Prequesites
 
+### Install Packages:
 - node
 - ruby (if deploying from your local) (apple version ruby 2.6.10p210)
 - fastlane (if deploying from your local)
+- `xcode-select --install`
+- `brew install cocoapods`
 
+### Setup Environment Variables for Android Development
+#### For MAC_OS
+- Open your `~/.bash_profile` (If you have vsCode `code`command installed: `code ~/.bash_profile`)
+- Add these lines:
+```
+export JAVA_HOME=$(/usr/libexec/java_home)
+export PATH=$PATH:$JAVA_HOME
+export ANDROID_SDK_ROOT=/path/to/your/android-sdk
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/tools
+```
+- Apply Changes: `source ~/.bash_profile
 
-Android Developement:
-
-* Android studio
-* Java JDK
-
-
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home"
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # Getting Started
 
