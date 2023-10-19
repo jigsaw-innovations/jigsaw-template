@@ -7,7 +7,7 @@ on:
 
 jobs:
   checkout_and_setup:
-    name: "Setup: Checkout and Install Dependencies 🛒"
+    name: "Setup: Installing dependencies 🛒"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code 🛒
@@ -30,7 +30,7 @@ jobs:
         run: gem install fastlane
 
   ios_beta_deploy:
-    name: "Deployment: iOS Beta 🖥️✈️"
+    name: "Deployment: Deploying iOS Beta 🖥️✈️"
     needs: checkout_and_setup
     runs-on: ubuntu-latest
     steps:
@@ -58,7 +58,7 @@ jobs:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
 
   android_beta_deploy:
-    name: "Deployment: Android Beta 🤖✈️"
+    name: "Deployment: Deploying Android Beta 🤖✈️"
     needs: checkout_and_setup
     runs-on: ubuntu-latest
     steps:

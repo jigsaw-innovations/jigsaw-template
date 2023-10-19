@@ -7,7 +7,7 @@ on:
 
 jobs:
   setup:
-    name: "Setup: Checkout and Install Dependencies 🛒"
+    name: "Setup: Installing dependencies 🛒"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code 🛒
@@ -22,7 +22,7 @@ jobs:
         run: gem install fastlane
 
   ios_production:
-    name: "Deployment: iOS Production Release 🖥️🚀"
+    name: "Deployment: Deploying iOS Production Release 🖥️🚀"
     needs: setup
     runs-on: ubuntu-latest
     steps:
@@ -44,7 +44,7 @@ jobs:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
 
   android_production:
-    name: "Deployment: Android Production Release 🤖🚀"
+    name: "Deployment: Deploying Android Production Release 🤖🚀"
     needs: setup
     runs-on: ubuntu-latest
     steps:
