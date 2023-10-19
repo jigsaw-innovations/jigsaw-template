@@ -3,8 +3,20 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 ## Prequesites
 
 - node
-- ruby (if deploying from your local)
+- ruby (if deploying from your local) (apple version ruby 2.6.10p210)
 - fastlane (if deploying from your local)
+
+
+Android Developement:
+
+* Android studio
+* Java JDK
+
+
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home"
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # Getting Started
 
@@ -14,6 +26,33 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 
 ## Using npm
+
+
+## Setup environment variables
+
+Create `.env`, `.env-production`
+
+...
+
+
+For jigsaw cli:
+
+When user runs: $ jigsaw new <app_name>
+
+1. Curl jigsaw template repo (without android and ios directories)
+2. Replace __template__ with <app_name>
+3. npm i react-native-eject
+4. react-native eject (generating ios and android directories)
+5. cd ios/ && pod install
+
+...
+
+Prompt user if they want to include Firebase authentication [y/N]:
+
+If no, remove Firebase auth files (GoogleButton.tsx and AppleButton.tsx)
+If yes, take user through Firebase setup
+
+Prompt user for .env , .env-staging, .env-production form
 
 
 
