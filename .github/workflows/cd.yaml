@@ -1,3 +1,4 @@
+# TODO: Use bundle exec for fastlane and gemfile
 name: React Native CD
 
 on:
