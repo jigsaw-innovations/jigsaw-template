@@ -1,0 +1,68 @@
+name: Update Cocoapods Dependencies after Dependabot package upgrade
+on:
+  push:
+    branches:
+      - dependabot/npm_and_yarn/** # OR dependabot/npm_and_yarn/**react-native** to run only for packages that have react-native in the name
+  pull_request:
+    branches:
+      - dependabot/npm_and_yarn/** # OR dependabot/npm_and_yarn/**react-native** to run only for packages that have react-native in the name
+  workflow_dispatch:
+
+jobs:
+  run:
+    name: Run pod install
+    runs-on: macos-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install Node.js 📦
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+
+      - name: Install Dependencies 🧹
+        run: npm install
+
+      # Continue as before with Cocoapods...
+      - name: Cache pods
+        uses: actions/cache@v1
+        with:
+          path: ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+      - name: Install Cocoapods Packages
+        run: pushd ios && pod install --verbose && popd
+
+      - name: Generate Commit Message
+        id: generate_commit_message
+        run: |
+          branch=${GITHUB_REF#refs/heads/}
+          commit_message="Bump ${branch//dependabot\/npm_and_yarn\// } cocoapods packages%0A%0A[dependabot skip]"
+          echo ::set-output name=commit_message::$commit_message
+
+      - uses: stefanzweifel/git-auto-commit-action@v4.1.1
+        with:
+          branch: ${{ github.head_ref }}
+          commit_message: ${{ steps.generate_commit_message.outputs.commit_message }}
+          token: ${{ secrets.GHEC_PAT }}
+
+      - name: Increment package.json minor version
+        run: npm version minor
+
+      - name: Push changes
+        uses: stefanzweifel/git-auto-commit-action@v4.1.1
+        with:
+          branch: ${{ github.head_ref }}
+          commit_message: ${{ steps.generate_commit_message.outputs.commit_message }}
+          token: ${{ secrets.GHEC_PAT }}
+          run: git push origin HEAD:${{ github.head_ref }}
