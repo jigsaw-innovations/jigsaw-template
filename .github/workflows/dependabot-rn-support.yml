@@ -16,24 +16,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # Cache node_modules for faster builds
-      - name: Cache Node.js modules
-        uses: actions/cache@v1
+      - name: Cache node modules
+        uses: actions/cache@v3
         with:
           path: node_modules
-          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.OS }}-node-
+            ${{ runner.os }}-node-
 
-      - uses: actions/setup-node@v2
+      - name: Install Node.js 📦
+        uses: actions/setup-node@v2
         with:
           node-version: '16.x'
-          registry-url: https://registry.npmjs.org/
 
-      - name: Install Packages
-        run: npm ci
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Install Dependencies 🧹
+        run: npm install
 
       # Continue as before with Cocoapods...
       - name: Cache pods
