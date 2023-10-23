@@ -4,4 +4,8 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    target-branch: "main"
+    labels:
+      - "dependencies"
+      - "automerge"
     open-pull-requests-limit: 3
