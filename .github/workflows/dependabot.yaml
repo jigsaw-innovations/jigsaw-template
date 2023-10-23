@@ -1,3 +1,5 @@
+name: Dependabot 🦾
+
 version: 2
 updates:
   - package-ecosystem: "npm"
@@ -7,5 +9,6 @@ updates:
     allow:
       - dependency-type: "direct"
     open-pull-requests-limit: 3
-    reviewers:
-      # Add additional reviewers for dependabot PRs (not in CODEOWNERS) , e.g "- johndoe"
+      # Add additional reviewers for dependabot PRs (not in CODEOWNERS) e.g,
+      # reviewers:
+      #   - "johndoe"
