@@ -54,6 +54,7 @@ jobs:
         with:
           branch: ${{ github.head_ref }}
           commit_message: ${{ steps.generate_commit_message.outputs.commit_message }}
+          token: ${{ secrets.GHEC_PAT }}
 
       - name: Increment package.json minor version
         run: npm version minor
