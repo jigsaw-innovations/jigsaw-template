@@ -9,3 +9,4 @@ updates:
       - "dependencies"
       - "automerge"
     open-pull-requests-limit: 3
+    versioning-strategy: "auto"  # or "widen", "lockfile-only"
