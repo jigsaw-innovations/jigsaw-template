@@ -28,8 +28,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gems-
 
-      - name: Install Fastlane 🏎️
-        run: gem install fastlane
+      - name: Install Dependencies via Bundler 📦
+        run: bundle install
 
   ios_beta_deploy:
     name: "Deployment: Deploying iOS Beta 🖥️✈️"
@@ -39,13 +39,7 @@ jobs:
       - name: Checkout Code 🛒
         uses: actions/checkout@v2
 
-      # Repeat the setup steps, including restoring the cache
-      - name: Set up Ruby 💎
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '2.7'
-
-      - name: Restore Cache
+      - name: Restore Ruby Cache 💎
         uses: actions/cache@v2
         with:
           path: vendor/bundle
@@ -54,7 +48,7 @@ jobs:
             ${{ runner.os }}-gems-
 
       - name: iOS Beta Deployment 🖥️✈️
-        run: fastlane ios beta
+        run: bundle exec fastlane ios beta
         env:
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
@@ -67,13 +61,7 @@ jobs:
       - name: Checkout Code 🛒
         uses: actions/checkout@v2
 
-      # Repeat the setup steps, including restoring the cache
-      - name: Set up Ruby 💎
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '2.7'
-
-      - name: Restore Cache
+      - name: Restore Ruby Cache 💎
         uses: actions/cache@v2
         with:
           path: vendor/bundle
@@ -82,7 +70,7 @@ jobs:
             ${{ runner.os }}-gems-
 
       - name: Android Beta Deployment 🤖✈️
-        run: fastlane android beta
+        run: bundle exec fastlane android beta
         env:
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
           JSON_KEY_DATA: ${{ secrets.JSON_KEY_DATA }}

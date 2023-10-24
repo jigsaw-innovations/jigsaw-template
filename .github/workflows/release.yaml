@@ -20,8 +20,16 @@ jobs:
         with:
           ruby-version: '2.7'
 
-      - name: Install Fastlane 🏎️
-        run: gem install fastlane
+      - name: Cache Ruby Gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
+      - name: Install Dependencies via Bundler 📦
+        run: bundle install
 
   ios_production:
     name: "Deployment: Deploying iOS Production Release 🖥️🚀"
@@ -31,16 +39,16 @@ jobs:
       - name: Checkout Code 🛒
         uses: actions/checkout@v2
 
-      - name: Set up Ruby 💎
-        uses: ruby/setup-ruby@v1
+      - name: Restore Ruby Cache 💎
+        uses: actions/cache@v2
         with:
-          ruby-version: '2.7'
-
-      - name: Install Fastlane 🏎️
-        run: gem install fastlane
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
 
       - name: iOS Production Deployment 🖥️🚀
-        run: fastlane ios release
+        run: bundle exec fastlane ios release
         env:
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
@@ -53,16 +61,16 @@ jobs:
       - name: Checkout Code 🛒
         uses: actions/checkout@v2
 
-      - name: Set up Ruby 💎
-        uses: ruby/setup-ruby@v1
+      - name: Restore Ruby Cache 💎
+        uses: actions/cache@v2
         with:
-          ruby-version: '2.7'
-
-      - name: Install Fastlane 🏎️
-        run: gem install fastlane
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
 
       - name: Android Production Deployment 🤖🚀
-        run: fastlane android release
+        run: bundle exec fastlane android release
         env:
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
           JSON_KEY_DATA: ${{ secrets.JSON_KEY_DATA }}
