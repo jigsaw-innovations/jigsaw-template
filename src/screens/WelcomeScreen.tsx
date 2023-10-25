@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import HomeIcon from "../assets/icons/HomeIcon";
+import HomeIcon from '../assets/icons/HomeIcon';
 
 const WelcomeScreen = () => {
   return (

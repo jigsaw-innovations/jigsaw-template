@@ -4,10 +4,7 @@ import LottieView from 'lottie-react-native';
 
 interface LoaderProps {
   backgroundColor?: string;
-  size?: {
-    width: number;
-    height: number;
-  };
+  size?: {width: number; height: number};
 }
 
 interface LoaderState {
