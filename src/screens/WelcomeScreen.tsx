@@ -1,10 +1,13 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import HomeIcon from '../assets/icons/HomeIcon';
 
 const WelcomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.welcomeText}>Welcome to &lt;app_name&gt;</Text>
+      <HomeIcon size={32} isFilled={false} />
+      <Text>Hello</Text>
     </View>
   );
 };
