@@ -50,19 +50,19 @@ jobs:
           commit_message="Bump ${branch//dependabot\/npm_and_yarn\// } cocoapods packages%0A%0A[dependabot skip]"
           echo ::set-output name=commit_message::$commit_message
 
-      - uses: stefanzweifel/git-auto-commit-action@v4.1.1
-        with:
-          branch: ${{ github.head_ref }}
-          commit_message: ${{ steps.generate_commit_message.outputs.commit_message }}
-          token: ${{ secrets.GHEC_PAT }}
-
-      - name: Increment package.json minor version
-        run: npm version minor
-
-      - name: Push changes
-        uses: stefanzweifel/git-auto-commit-action@v4.1.1
-        with:
-          branch: ${{ github.head_ref }}
-          commit_message: ${{ steps.generate_commit_message.outputs.commit_message }}
-          token: ${{ secrets.GHEC_PAT }}
-          run: git push origin HEAD:${{ github.head_ref }}
+#      - uses: stefanzweifel/git-auto-commit-action@v4.1.1
+#        with:
+#          branch: ${{ github.head_ref }}
+#          commit_message: ${{ steps.generate_commit_message.outputs.commit_message }}
+#          token: ${{ secrets.GHEC_PAT }}
+#
+#      - name: Increment package.json minor version
+#        run: npm version minor
+#
+#      - name: Push changes
+#        uses: stefanzweifel/git-auto-commit-action@v4.1.1
+#        with:
+#          branch: ${{ github.head_ref }}
+#          commit_message: ${{ steps.generate_commit_message.outputs.commit_message }}
+##          token: ${{ secrets.GHEC_PAT }}
+#          run: git push origin HEAD:${{ github.head_ref }}
