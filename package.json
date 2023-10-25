@@ -1,6 +1,6 @@
 {
   "name": "@jigsaw-innovations/jigsaw",
-  "version": "0.1.0",
+  "version": "0.1.10",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -19,9 +19,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "react": "18.2.0",
-    "react-native": "0.72.6",
-    "react-native-eject": "^0.2.0"
+    "react": "latest",
+    "react-native": "latest",
+    "react-native-svg": "^13.14.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
