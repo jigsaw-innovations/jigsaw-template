@@ -1,4 +1,5 @@
 .github/workflows/publish.yaml
+.github/CODEOWNERS
 .git
 .idea
 node_modules
