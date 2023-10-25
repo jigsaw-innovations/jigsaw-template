@@ -66,9 +66,9 @@ yarn-error.log
 /coverage
 
 # Environment variable files
-.env
-.env.staging
-.env.production
+#.env
+#.env.staging
+#.env.production
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/reactnative
