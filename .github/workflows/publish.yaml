@@ -1,4 +1,4 @@
-name: Deploy Production Release
+name: Publish Node Package
 
 on:
   push:
