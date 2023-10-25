@@ -1,4 +1,5 @@
 import {readdirSync, existsSync, unlinkSync, rmdirSync, lstatSync} from 'fs';
+const fs = require('fs');
 const path = require('path');
 
 const itemsToRemove = [
@@ -12,6 +13,7 @@ const itemsToRemove = [
   '.idea',
   // add more files to remove
 ];
+
 
 // Function to recursively remove a directory
 const removeDirectory = dirPath => {
@@ -37,6 +39,21 @@ const removeDirectory = dirPath => {
   }
 };
 
+// Define the path to the package.json file
+const packageJsonPath = path.join(__dirname, 'package.json');
+
+// Read the package.json file into a JavaScript object
+const packageJson = require(packageJsonPath);
+
+// Split the name at the '/' character and take the last part
+const newName = packageJson.name.split('/').pop();
+
+// Update the name in the package.json object
+packageJson.name = newName;
+
+// Write the updated package.json object back to the package.json file
+fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
+
 itemsToRemove.forEach(itemPath => {
   const fullPath = path.join(process.cwd(), itemPath);
   if (existsSync(fullPath)) {
@@ -51,11 +68,12 @@ itemsToRemove.forEach(itemPath => {
   }
 });
 
-// Remove the script itself
-const scriptPath = path.join(process.cwd(), 'removeFiles.js');
-if (existsSync(scriptPath)) {
-  unlinkSync(scriptPath);
-  console.log(`Removed post-init script: ${scriptPath}`);
-} else {
-  console.log(`Post-init script does not exist: ${scriptPath}`);
-}
+//
+// // Remove the script itself
+// const scriptPath = path.join(process.cwd(), 'removeFiles.js');
+// if (existsSync(scriptPath)) {
+//   unlinkSync(scriptPath);
+//   console.log(`Removed post-init script: ${scriptPath}`);
+// } else {
+//   console.log(`Post-init script does not exist: ${scriptPath}`);
+// }
