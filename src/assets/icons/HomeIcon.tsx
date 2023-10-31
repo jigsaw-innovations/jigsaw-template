@@ -1,4 +1,4 @@
-import AbstractIcon from './AbstractIcon'; // Import the AbstractIcon abstract class
+import AbstractIcon from './AbstractIcon';
 
 class HomeIcon extends AbstractIcon {
   path() {

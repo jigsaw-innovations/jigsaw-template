@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import HomeIcon from '../assets/icons/HomeIcon';
+import SettingsIcon from "../assets/icons/SettingsIcon";
 
 const WelcomeScreen = () => {
   return (
@@ -8,6 +9,7 @@ const WelcomeScreen = () => {
       <Text style={styles.welcomeText}>Welcome to &lt;app_name&gt;</Text>
       <HomeIcon size={32} isFilled={false} />
       <Text>Hello</Text>
+      <SettingsIcon size={32} isFilled={false} />
     </View>
   );
 };
