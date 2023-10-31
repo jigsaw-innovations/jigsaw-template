@@ -1,0 +1,56 @@
+name: Publish Node Package
+
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+  workflow_dispatch:
+
+jobs:
+  checkout_and_setup:
+    name: "Setup: Installing dependencies 🛒"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code 🛒
+        uses: actions/checkout@v2
+
+      - name: Install Node.js 📦
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+
+      - name: Install Dependencies 🧹
+        run: npm install
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+  publish:
+    needs: checkout_and_setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code 🛒
+        uses: actions/checkout@v2
+
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
+      - name: Update package.json name to suffix "-template"
+        run: |
+          jq '.name="jigsaw-template"' package.json > temp.json
+          mv temp.json package.json
+
+      - name: Publish package 🚀
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
