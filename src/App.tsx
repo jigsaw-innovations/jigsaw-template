@@ -1,8 +1,8 @@
 import React from 'react';
-import WelcomeScreen from './screens/WelcomeScreen';
+import BottomTabNavigator from './navigation/tabs/BottomTabNavigator';
 
 const App = () => {
-  return <WelcomeScreen />;
+  return <BottomTabNavigator />;
 };
 
 export default App;
