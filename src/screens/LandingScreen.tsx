@@ -1,12 +1,7 @@
 import React, {useEffect} from 'react';
-import {
-  View,
-  Text,
-  Animated,
-  StyleSheet,
-  StackNavigationProp,
-} from 'react-native';
+import {View, Text, Animated, StyleSheet} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 type LandingScreenStackParamList = {
   Home: undefined;
@@ -21,15 +16,11 @@ const LandingScreen: React.FC<LandingScreenProps> = ({navigation}) => {
   const fadeAnim = new Animated.Value(0); // Initial value for opacity: 0
 
   useEffect(() => {
-    Animated.timing(
-      fadeAnim, // The animated value to drive
-      {
-        toValue: 1, // Animate to opacity: 1 (opaque)
-        duration: 2000, // Make it take 2000ms
-        useNativeDriver: true,
-      },
-    ).start(() => {
-      // Once the animation is done, navigate to another screen
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 2000,
+      useNativeDriver: true,
+    }).start(() => {
       navigation.navigate('Home');
     });
   }, [fadeAnim]);
