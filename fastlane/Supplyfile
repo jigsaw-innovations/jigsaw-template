@@ -1,0 +1,23 @@
+# The package name of the application to use or create
+package_name("com.example.myapp")
+
+# Path to the directory containing the metadata files (e.g., title, description)
+metadata_path("./metadata/android")
+
+# Track to use when uploading the APK/AAB (e.g., "alpha", "beta", "production")
+track("beta")
+
+# The path to a directory containing the images/screenshots for the Play Store listing
+# Each language should have its own directory within the specified directory.
+screenshots_path("./fastlane/metadata/android/screenshots")
+
+# The path to the JSON key file used to authenticate with Google
+json_key("./path/to/your/json/key.json")
+
+# The percentage of the user fraction when doing a staged rollout (value between 0.0 to 1.0)
+# rollout("0.5")
+
+# Skip uploading metadata, changelog or images
+# skip_upload_metadata(true)
+# skip_upload_images(true)
+# skip_upload_screenshots(true)
